@@ -3,8 +3,8 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Globe, Building2 } from "lucide-react";
 
 export function TopBar({ onLogout }: { onLogout?: () => void }) {
-  const { lang, setLang, t } = useLanguage();
   const { user } = useApp();
+  const { t, lang, setLang } = useLanguage();
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)]">
@@ -14,10 +14,8 @@ export function TopBar({ onLogout }: { onLogout?: () => void }) {
         <div className="flex items-center gap-3">
           <img src="/chennai_corporation_emblem.png" alt="Chennai Corporation" className="h-10 w-10 lg:h-11 lg:w-11 object-contain" />
           <div className="leading-tight text-[#1e3a8a]">
-            <h1 className="text-[12px] lg:text-[14px] font-bold tracking-tight">{t("Greater Chennai Corporation")}</h1>
-            {lang !== "ta" && (
-              <p className="text-[10px] lg:text-[11px] font-tamil font-semibold mt-0.5">சென்னை மாநகராட்சி</p>
-            )}
+            <h1 className="text-[12px] lg:text-[14px] font-bold tracking-tight">{t("gccName")}</h1>
+            <p className="text-[10px] lg:text-[11px] font-tamil font-semibold mt-0.5">{t("gccTamil")}</p>
           </div>
         </div>
 
