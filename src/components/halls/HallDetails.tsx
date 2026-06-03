@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useApp, type Hall } from "@/contexts/AppContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,15 +8,15 @@ import { Calendar } from "@/components/ui/calendar";
 import { ChevronLeft, ChevronRight, ArrowLeft, Star } from "lucide-react";
 
 export function HallDetails({ hall, onBack, onCalculate }: { hall: Hall; onBack: () => void; onCalculate: () => void }) {
-  const { t } = useApp();
+  const { t } = useLanguage();
   const [idx, setIdx] = useState(0);
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   const specs: [string, string | number][] = [
-    [t("zone"), hall.zone],
-    [t("division"), hall.division],
-    [t("landmark"), hall.landmark],
-    [t("capacity"), `${hall.capacity} guests`],
+    [t("zone"), t(hall.zone)],
+    [t("division"), t(hall.division)],
+    [t("landmark"), t(hall.landmark)],
+    [t("capacity"), `${hall.capacity} ${t("guests")}`],
     [t("rent"), `₹${hall.rent.toLocaleString()}`],
     [t("deposit"), `₹${hall.deposit.toLocaleString()}`],
   ];
@@ -27,7 +28,7 @@ export function HallDetails({ hall, onBack, onCalculate }: { hall: Hall; onBack:
       <div className="grid lg:grid-cols-2 gap-6">
         <Card className="overflow-hidden">
           <div className="relative aspect-video bg-muted">
-            <img src={hall.images[idx]} alt={hall.name} className="h-full w-full object-cover transition-opacity duration-300" />
+            <img src={hall.images[idx]} alt={t(hall.name)} className="h-full w-full object-cover transition-opacity duration-300" />
             <button onClick={() => setIdx((idx - 1 + hall.images.length) % hall.images.length)} className="absolute left-2 top-1/2 -translate-y-1/2 grid place-items-center h-9 w-9 rounded-full bg-background/80 backdrop-blur hover:bg-background"><ChevronLeft className="h-5 w-5" /></button>
             <button onClick={() => setIdx((idx + 1) % hall.images.length)} className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center h-9 w-9 rounded-full bg-background/80 backdrop-blur hover:bg-background"><ChevronRight className="h-5 w-5" /></button>
             <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
@@ -46,8 +47,8 @@ export function HallDetails({ hall, onBack, onCalculate }: { hall: Hall; onBack:
         <div className="space-y-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h2 className="text-2xl font-bold">{hall.name}</h2>
-              <p className="text-sm text-muted-foreground">{hall.landmark}</p>
+              <h2 className="text-2xl font-bold">{t(hall.name)}</h2>
+              <p className="text-sm text-muted-foreground">{t(hall.landmark)}</p>
             </div>
             <Badge variant="secondary" className="text-base"><Star className="h-4 w-4 mr-1 fill-current" />{hall.rating}</Badge>
           </div>

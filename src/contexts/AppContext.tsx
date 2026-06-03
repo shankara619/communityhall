@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { dict, type Lang, type TKey } from "@/lib/i18n";
+import { useLanguage } from "./LanguageContext";
 
 type Theme = "light" | "dark";
 type FontSize = "small" | "default" | "large";
@@ -55,7 +56,7 @@ const initialBooking: BookingState = {
 
 export function AppProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
-  const [lang, setLang] = useState<Lang>("en");
+  const { lang, setLang } = useLanguage();
   const [fontSize, setFontSize] = useState<FontSize>("default");
   const [user, setUser] = useState<User | null>(null);
   const [booking, setBooking] = useState<BookingState>(initialBooking);

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AppProvider, useApp, type Hall } from "@/contexts/AppContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import { TopBar } from "@/components/TopBar";
 import { AuthScreen } from "@/components/auth/AuthScreen";
 import { HallList } from "@/components/halls/HallList";
@@ -19,7 +20,14 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Book community halls online with rent calculator, document upload and secure payments." },
     ],
   }),
-  component: () => <AppProvider><App /><Toaster richColors position="top-right" /></AppProvider>,
+  component: () => (
+    <LanguageProvider>
+      <AppProvider>
+        <App />
+        <Toaster richColors position="top-right" />
+      </AppProvider>
+    </LanguageProvider>
+  ),
 });
 
 type View = "list" | "details" | "calculator" | "wizard";
