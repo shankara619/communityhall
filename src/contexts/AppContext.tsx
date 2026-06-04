@@ -10,6 +10,8 @@ export interface Hall {
   rent: number; halfDayRent: number; deposit: number; halfDayDeposit: number;
   zone: string; division: string;
   landmark: string; capacity: number; images: string[];
+  address: string; totalArea: string; parkingCapacity: string;
+  gstPercentage: number; ebChargePerUnit: number; caretakerNumber: string;
 }
 
 export interface UploadedDoc { id: string; type: string; name: string; fileName: string; }
@@ -47,7 +49,7 @@ interface Ctx {
 const AppCtx = createContext<Ctx | null>(null);
 
 const initialBooking: BookingState = {
-  hall: null, reason: "", numDays: 1, startPeriod: "09:00", endPeriod: "18:00",
+  hall: null, reason: "Marriage", numDays: 1, startPeriod: "Morning (6:00 AM)", endPeriod: "Morning (2:00 PM)",
   calc: null, functionary: "", bookingReason: "", fromDate: "", toDate: "",
   docs: [], agreed: false,
   payment: { method: "card", card: { number: "", name: "", expiry: "", cvv: "" } },
